@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
   validates :category, inclusion: { in: %w(Fiction Non-Fiction),
     message: "%{value} is not a valid category" }
   # validates :title, inclusion: { in: %w(Won't Believe Secret Top [0-9]* Guess) }
+  validate :is_not_clickbait?
 
   def is_not_clickbait?
     if !title.include? "Won't Believe" || !title.include? "Secret" || !title.include? "Top" || !title.include? "Guess"
